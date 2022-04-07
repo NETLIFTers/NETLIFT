@@ -41,6 +41,7 @@ export const loginUser = (e) => {
 
 export const fetchProfile = () => {
   return async (dispatch) => {
+    dispatch({ type: "LOADING" });
     try {
       const token = localStorage.getItem("token");
 
