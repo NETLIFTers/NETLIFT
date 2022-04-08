@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:not(:placeholder-shown) ~ .registration_form {
+  @apply transform scale-75 -translate-y-6 font-bold;
+}
+
+input:not(:placeholder-shown) ~ .registration_message {
+  @apply text-red-500 font-normal;
+}
+
+.react-calendar {
+  @apply w-full px-6 text-nl-darkblue text-xl leading-10;
+}
+.react-calendar__month-view__weekdays {
+  @apply text-base font-bold;
+}
+.react-calendar__navigation {
+  @apply flex;
+}
+
+.react-calendar__navigation button {
+  @apply text-nl-navblue text-xl font-bold my-4 px-4 py-2 text-center;
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+.react-calendar__tile--now {
+  @apply font-bold text-red-500;
+}
+
+.react-calendar__tile--active {
+  @apply font-bold text-nl-navblue;
+}
+.react-calendar__year-view__months {
+  @apply text-base leading-8;
+}
+.react-calendar__decade-view__years {
+  @apply text-base leading-8;
+}
+.react-calendar__century-view__decades {
+  @apply text-base leading-10;
+}

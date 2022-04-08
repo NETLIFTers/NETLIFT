@@ -1,0 +1,4 @@
+[submodule "NETLIFT-server"]
+	path = server
+	url =  https://github.com/NETLIFTers/NETLIFT-server.git
+	branch = staging
