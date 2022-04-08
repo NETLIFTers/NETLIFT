@@ -10,16 +10,28 @@ import { useDispatch, useSelector } from "react-redux";
 const ProgramsPage = () => {
   const programs = useSelector((state) => state.user.profile);
   const loading = useSelector((state) => state.user.loading);
+  const exercise = useSelector((state) => state.exercise.exercise);
   const dispatch = useDispatch();
   const getProgramData = () => dispatch(fetchProfile());
+  const today = dayjs();
+  const dayOfWeek = today.day();
 
   useEffect(() => {
     getProgramData();
   }, []);
 
+  const renderExercises = () => {
+    if (exercise.length > 0) {
+      console.log(exercise);
+      return exercise;
+    } else {
+      return false;
+    }
+  };
+
   const renderPreview = () => {
     console.log(loading);
-    if (programs._programs) {
+    if (programs._programs && renderExercises()) {
       let trainingDays = programs._programs[0].training_days.map((day) =>
         day < dayOfWeek ? day + 7 : day
       );
@@ -27,18 +39,16 @@ const ProgramsPage = () => {
       return trainingDays.map((day) => (
         <WorkoutPreview
           day={today.day(day).format("ddd D MMM")}
-          exercises={exerciseList}
+          exercises={renderExercises()}
           key={today.day(day).format()}
           workoutNum={1}
         />
       ));
     } else {
-      return <p>loading</p>;
+      return <p>create an exercise</p>;
     }
   };
 
-  console.log("rand log", programs._programs);
-  // console.log(programs._lifts);
   const lsToken = localStorage.getItem("token");
   const nav = useNavigate();
   useEffect(() => {
@@ -53,47 +63,12 @@ const ProgramsPage = () => {
     setQuote(await getQuote());
   }, [token]);
 
-  const fakelift1 = {
-    id: 1,
-    rep: 5,
-    set: 5,
-    exercise_id: 2,
-  };
+  // const exerciseList = [
+  //   { name: fakeExercise1.name, sets: fakelift2.set, reps: fakelift1.rep },
+  //   { name: fakeExercise2.name, sets: fakelift1.set, reps: fakelift1.rep },
+  //   { name: fakeExercise3.name, sets: fakelift3.set, reps: fakelift3.rep },
+  // ];
 
-  const fakelift2 = {
-    id: 2,
-    rep: 5,
-    set: 5,
-    exercise_id: 1,
-  };
-
-  const fakelift3 = {
-    id: 3,
-    rep: 5,
-    set: 5,
-    exercise_id: 3,
-  };
-
-  const fakeExercise1 = {
-    id: 1,
-    name: "squat",
-  };
-  const fakeExercise2 = {
-    id: 2,
-    name: "dead lift",
-  };
-  const fakeExercise3 = {
-    id: 3,
-    name: "bench",
-  };
-
-  const exerciseList = [
-    { name: fakeExercise1.name, sets: fakelift2.set, reps: fakelift1.rep },
-    { name: fakeExercise2.name, sets: fakelift1.set, reps: fakelift1.rep },
-    { name: fakeExercise3.name, sets: fakelift3.set, reps: fakelift3.rep },
-  ];
-  const today = dayjs();
-  const dayOfWeek = today.day();
   // if the day has already passed we add seven so we can order them from the current date
 
   // TODO: turn this into a link to the workout page

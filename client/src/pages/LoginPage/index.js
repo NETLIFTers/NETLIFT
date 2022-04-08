@@ -23,7 +23,7 @@ const LoginPage = () => {
       dispatch(fetchProfile());
       nav("/", { replace: true });
     }
-  });
+  }), [];
 
   return (
     <div className="mx-auto bg-nl-darkblue min-h-screen container pt-16 px-8">
