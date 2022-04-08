@@ -2,15 +2,15 @@
  * @jest-environment jsdom
  */
 
-import { default as Progress } from ".";
+import { default as SettingsLogout } from ".";
 import { screen, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
-describe("Progress", () => {
+describe("SettingsLogout", () => {
   it("renders page", () => {
     render(
       <MemoryRouter>
-        <Progress />
+        <SettingsLogout />
       </MemoryRouter>
     );
     let content = screen;

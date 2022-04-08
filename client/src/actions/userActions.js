@@ -107,7 +107,6 @@ export const getQuote = async () => {
 export const updateLifts = (exName) => {
   return async (dispatch) => {
     try {
-
       dispatch({
         type: "LOAD_EXERCISES",
         payload: exName,
@@ -119,23 +118,20 @@ export const updateLifts = (exName) => {
       });
     }
   };
-}
+};
 
-
-export const setExercises =  (exercises) => {
+export const setExercises = (exercises) => {
   return async (dispatch) => {
     dispatch({
       type: "LOAD_EXERCISES",
       payload: exercises,
     });
   };
-}
-
+};
 
 export const logout = () => {
   return async (dispatch) => {
     try {
-
       dispatch({
         type: "LOGOUT",
         payload: "",
@@ -146,5 +142,13 @@ export const logout = () => {
         payload: err,
       });
     }
+  };
+};
+
+export const setProgram = (program) => {
+  return async () => {
+    const { data } = await axios.post(`${api}program`, {
+      program: program,
+    });
   };
 };

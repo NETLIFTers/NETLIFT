@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import Title from "../../components/Title";
 import { fetchProfile, getQuote } from "../../actions/userActions";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProgramsPage = () => {
@@ -22,7 +22,6 @@ const ProgramsPage = () => {
 
   const renderExercises = () => {
     if (exercise.length > 0) {
-      console.log(exercise);
       return exercise;
     } else {
       return false;
@@ -30,7 +29,6 @@ const ProgramsPage = () => {
   };
 
   const renderPreview = () => {
-    console.log(loading);
     if (programs._programs && renderExercises()) {
       let trainingDays = programs._programs[0].training_days.map((day) =>
         day < dayOfWeek ? day + 7 : day
@@ -39,13 +37,25 @@ const ProgramsPage = () => {
       return trainingDays.map((day) => (
         <WorkoutPreview
           day={today.day(day).format("ddd D MMM")}
-          exercises={renderExercises()}
+          exercises={exercise}
+          // this has been hardcoded as the server was returning 0
+          unit={"kg"}
           key={today.day(day).format()}
           workoutNum={1}
         />
       ));
     } else {
-      return <p>create an exercise</p>;
+      return (
+        <p className=" text-slate-50 text-lg">
+          You don't have any Programs yet, why not{" "}
+          <Link
+            className="font-bold text-nl-lightblue hover:opacity-70"
+            to="/create"
+          >
+            create one?
+          </Link>
+        </p>
+      );
     }
   };
 
