@@ -22,7 +22,7 @@ const userReducer = (state = initialState, action) => {
     }
     case "LOGOUT": {
       const isLoggedOut = action.payload;
-      return { ...state, logout: isLoggedOut };
+      return { ...state, user: isLoggedOut };
     }
     default:
       return state;

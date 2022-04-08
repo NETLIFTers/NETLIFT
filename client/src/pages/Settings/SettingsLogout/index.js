@@ -1,12 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../actions/userActions";
 
 const SettingsLogout = () => {
   const nav = useNavigate();
+  const dispatch = useDispatch()
   const handleClick = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     nav("/login", { replace: true });
+    dispatch(logout())
+    
+    
   };
   return (
     <div className="pt-10 flex flex-col space-y-8">

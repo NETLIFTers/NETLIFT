@@ -131,3 +131,20 @@ export const setExercises =  (exercises) => {
   };
 }
 
+
+export const logout = () => {
+  return async (dispatch) => {
+    try {
+
+      dispatch({
+        type: "LOGOUT",
+        payload: "",
+      });
+    } catch (err) {
+      dispatch({
+        type: "SET_ERROR",
+        payload: err,
+      });
+    }
+  };
+};
